@@ -115,14 +115,22 @@ int main(int argc, char **argv) {
     struct sockaddr_in serv, cli;
     memset(&serv,0,sizeof(serv));
     serv.sin_family = AF_INET;
-    serv.sin_addr.s_addr = htonl(INADDR_ANY);
+    // Bind explicitly to loopback to avoid namespace/interface mismatches during testing
+    if (argc >= 3) {
+        // allow user to pass bind address as 2nd arg
+        inet_pton(AF_INET, argv[2], &serv.sin_addr);
+    } else {
+        inet_pton(AF_INET, "127.0.0.1", &serv.sin_addr);
+    }
     serv.sin_port = htons(port);
 
     if (bind(sock, (struct sockaddr*)&serv, sizeof(serv)) < 0) {
         perror("bind"); return 1;
     }
 
-    printf("DNS server listening on port %d...\n", port);
+    char bindaddr[INET_ADDRSTRLEN] = "?";
+    inet_ntop(AF_INET, &serv.sin_addr, bindaddr, sizeof(bindaddr));
+    printf("DNS server listening on %s:%d...\n", bindaddr, port);
 
     unsigned char buf[BUFSIZE];
     unsigned char resp[BUFSIZE];
