@@ -55,6 +55,24 @@ If the server runs on seperate vm:
 dig server_ip aGkA.google.com
 dig server_ip aGVsbG8A.google.com
 ```
+Test 1:
+Running commands on separate vms on unprivileged port:
+Command on server: ./server 6767
+Command on client: ./client 10.0.2.4 6767
+
+Server Output:
+<img width="769" height="221" alt="image" src="https://github.com/user-attachments/assets/3e62b515-8061-40b8-84fa-460d8ca6d111" />
+
+Client Output:
+<img width="728" height="172" alt="image" src="https://github.com/user-attachments/assets/1cc770b0-095a-4c70-b1a9-0c01067e4386" />
+
+Wireshark Capture
+<img width="560" height="435" alt="image" src="https://github.com/user-attachments/assets/eb0ceb6c-5f32-4d4e-b4e9-009eccc17da6" />
+
+Test 2 Dig Test:
+<img width="753" height="748" alt="image" src="https://github.com/user-attachments/assets/b3a8d5cc-8b1d-4d99-8f32-caffbaa1e016" />
+
+<img width="769" height="742" alt="image" src="https://github.com/user-attachments/assets/516c67fe-7603-40ac-a918-2116c27873ef" />
 
 Safety and assumptions
 
