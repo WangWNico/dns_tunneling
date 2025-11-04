@@ -51,7 +51,7 @@ dig @localhost aGVsbG8A.google.com
 ```
 
 If the server runs on seperate vm:
-'''bash
+```bash
 dig server_ip aGkA.google.com
 dig server_ip aGVsbG8A.google.com
 ```
