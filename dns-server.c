@@ -129,8 +129,11 @@ int main(int argc, char **argv) {
     socklen_t cli_len = sizeof(cli);
 
     while (1) {
-    ssize_t n = recvfrom(sock, buf, sizeof(buf), 0, (struct sockaddr*)&cli, &cli_len);
+        ssize_t n = recvfrom(sock, buf, sizeof(buf), 0, (struct sockaddr*)&cli, &cli_len);
         if (n <= 0) continue;
+        char addrstr[INET_ADDRSTRLEN] = "?";
+        inet_ntop(AF_INET, &cli.sin_addr, addrstr, sizeof(addrstr));
+        printf("Received %zd bytes from %s:%d\n", n, addrstr, ntohs(cli.sin_port));
     if (n < sizeof(struct dns_header)) continue;
         struct dns_header *hdr = (struct dns_header*)buf;
         uint16_t qdcount = ntohs(hdr->qdcount);

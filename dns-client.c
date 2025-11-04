@@ -182,6 +182,10 @@ int main(int argc, char **argv) {
 
         ssize_t sent = sendto(sock, query, qlen, 0, (struct sockaddr*)&serv, sizeof(serv));
         if (sent < 0) { perror("sendto"); return 1; }
+        else {
+            char saddr[INET_ADDRSTRLEN]; inet_ntop(AF_INET, &serv.sin_addr, saddr, sizeof(saddr));
+            printf("Sent %zd bytes to %s:%d\n", sent, saddr, ntohs(serv.sin_port));
+        }
 
         unsigned char resp[BUFSIZE];
         struct sockaddr_in from; socklen_t fromlen = sizeof(from);

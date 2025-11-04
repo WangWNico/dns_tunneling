@@ -15,16 +15,30 @@ gcc -o server dns-server.c -Wall -Wextra
 gcc -o client dns-client.c -Wall -Wextra
 ```
 
-2. Run server (non-root test): use port 53:
+2. Run server (non-root test): use port 53 (requires root) or use a non-privileged port like 5353.
+
+Run on port 53 (requires sudo/root):
 
 ```bash
 sudo ./server 53
 ```
 
-3. In another terminal, run client pointing to 53:
+Or run as a normal user on an unprivileged port (example: 5353):
 
 ```bash
-sudo /client 127.0.0.1 53
+./server 5353
+```
+
+3. In another terminal, run the client pointing to the server. Example (when server is on localhost port 53):
+
+```bash
+./client 127.0.0.1 53
+```
+
+Or if using port 5353 (non-root):
+
+```bash
+./client 127.0.0.1 5353
 ```
 
 You should see the client print the encoded messages and the decoded server replies, and the server print the encoded query name and decoded data.
@@ -48,3 +62,12 @@ Safety and assumptions
 
 - The code is intended for lab/testing use on your own VMs. Don't use it on networks where you don't have permission.
 - The client includes a trailing NUL byte in Base64 encoding so encoded values match the examples in the assignment.
+- The client includes a trailing NUL byte in Base64 encoding so encoded values match the examples in the assignment.
+
+Windows / PowerShell notes
+- If you're on Windows, you can build/run using MSYS2/Mingw (gcc) or use WSL/Ubuntu. The repo includes helpers:
+	- `run_test.sh` — builds and runs server/client on port 5353 (on Linux/WSL).
+	- `run_test.ps1` — PowerShell helper (requires `gcc` in PATH, e.g., from MSYS2).
+
+Security note
+- Run these programs only on your own lab VMs or networks where you have permission.
