@@ -11,11 +11,11 @@ Build and run (Linux / WSL / VM)
 1. Compile:
 
 ```bash
-gcc -o server dns-server.c -Wall -Wextra
-gcc -o client dns-client.c -Wall -Wextra
+gcc -o server dns-server.c
+gcc -o client dns-client.c
 ```
 
-2. Run server (non-root test): use port 53 (requires root) or use a non-privileged port like 5353.
+2. Run server note: The default port binding is 53 which requires root; If 53 does not work you may want to use any other port (e.g., 6767, 5353) for testing.
 
 Run on port 53 (requires sudo/root):
 
@@ -26,20 +26,34 @@ sudo ./server 53
 3. In another terminal, run the client pointing to the server. Example (when server is on localhost port 53):
 
 ```bash
-sudo ./client 127.0.0.1 53
+./client 127.0.0.1 53
 ```
 
-(When using two vms change 127.0.0.1 to the ip of your server vm)
+Alternate Steps On Seperate vms and unpriveledged port:
+(When using two VMs change `127.0.0.1` to the IP of your server VM)
+```bash
+./server 6767
+```
+
+```bash
+./client %server_ip% 6767
+```
 
 You should see the client print the encoded messages and the decoded server replies, and the server print the encoded query name and decoded data.
 
 Dig test
 
-If the server runs on port 53 on localhost:
+If the server runs on localhost (the new default):
 
 ```bash
 dig @localhost aGkA.google.com
 dig @localhost aGVsbG8A.google.com
+```
+
+If the server runs on seperate vm:
+'''bash
+dig server_ip aGkA.google.com
+dig server_ip aGVsbG8A.google.com
 ```
 
 Safety and assumptions
