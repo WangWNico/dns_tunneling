@@ -55,6 +55,8 @@ If the server runs on seperate vm:
 dig server_ip aGkA.google.com
 dig server_ip aGVsbG8A.google.com
 ```
+
+# Experiment Results
 Test 1:
 Running commands on separate vms on unprivileged port:
 Command on server: ./server 6767
