@@ -23,23 +23,13 @@ Run on port 53 (requires sudo/root):
 sudo ./server 53
 ```
 
-Or run as a normal user on an unprivileged port (example: 5353):
-
-```bash
-./server 5353
-```
-
 3. In another terminal, run the client pointing to the server. Example (when server is on localhost port 53):
 
 ```bash
-./client 127.0.0.1 53
+sudo ./client 127.0.0.1 53
 ```
 
-Or if using port 5353 (non-root):
-
-```bash
-./client 127.0.0.1 5353
-```
+(When using two vms change 127.0.0.1 to the ip of your server vm)
 
 You should see the client print the encoded messages and the decoded server replies, and the server print the encoded query name and decoded data.
 
@@ -50,12 +40,6 @@ If the server runs on port 53 on localhost:
 ```bash
 dig @localhost aGkA.google.com
 dig @localhost aGVsbG8A.google.com
-```
-
-If the server runs on a non-standard port (e.g., 5353), you can run dig like this:
-
-```bash
-dig @127.0.0.1 -p 5353 aGkA.google.com
 ```
 
 Safety and assumptions
