@@ -82,10 +82,5 @@ Safety and assumptions
 - The client includes a trailing NUL byte in Base64 encoding so encoded values match the examples in the assignment.
 - The client includes a trailing NUL byte in Base64 encoding so encoded values match the examples in the assignment.
 
-Windows / PowerShell notes
-- If you're on Windows, you can build/run using MSYS2/Mingw (gcc) or use WSL/Ubuntu. The repo includes helpers:
-	- `run_test.sh` — builds and runs server/client on port 5353 (on Linux/WSL).
-	- `run_test.ps1` — PowerShell helper (requires `gcc` in PATH, e.g., from MSYS2).
-
 Security note
 - Run these programs only on your own lab VMs or networks where you have permission.
